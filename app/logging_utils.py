@@ -10,6 +10,9 @@ from __future__ import annotations
 import json
 import sys
 from datetime import datetime, timezone
+import logging 
+
+logger = logging.getLogger(__name__)
 
 
 def utc_now_iso() -> str:
@@ -34,4 +37,12 @@ def log_event(event: str, level: str = "info", **fields) -> str:
         >>> log_event("ask_completed", user_id="sv01", cost_usd=0.0001)
         '{"event": "ask_completed", "level": "info", "timestamp": "...", ...}'
     """
-    raise NotImplementedError("TODO (CP1): cài đặt log_event")
+
+    a_log = json.dumps({"event": event, "level": level.lower(),"timestamp": utc_now_iso(),  **fields })
+
+    # logger.info(a_log)
+    print(a_log)
+    return a_log
+
+
+
